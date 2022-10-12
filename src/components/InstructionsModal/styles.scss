@@ -1,0 +1,86 @@
+@import "scss/styles.scss";
+
+.rootContentModal {
+    max-width: 300px;
+}
+
+.instructions {
+    font-family: 'Roboto';
+    font-size: 19px;
+
+    h2 {
+        text-align: center;
+    }
+
+    header {
+
+        p {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 19px;
+        }
+    }
+
+    &__examples {
+        display: flex;
+        gap: 11px;
+        margin-left: 10px;
+
+        margin-top: 23px;
+        margin-bottom: 19px;
+
+        .letter {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+
+            background: #FFFFFF;
+            border: 1px solid #000000;
+            border-radius: 5px;
+            font-family: 'Roboto';
+            font-weight: 700;
+            font-size: 35px;
+            height: 75px;
+            width: 75px;
+
+            &.activeGreen {
+                background-color: $greenColor;
+            }
+            &.activeYellow {
+                background-color: $yellowColor;
+            }
+            &.activeGray {
+                background-color: $grayColor;
+            }
+        }
+    }
+
+    &__newWord {
+        margin-top: 31px;
+        text-align: center;
+    }
+
+    &__footer {
+        display: flex;
+        justify-content: center;
+        
+        margin-top: 31px;
+
+        &-btnPlay {
+            background-color: $greenColor;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            
+            height: 44px;
+            max-width: 256px;
+            width: 100%;
+            
+            font-style: normal;
+            font-weight: 800;
+            font-size: 28px;
+            line-height: 33px;;
+        }
+    }
+}

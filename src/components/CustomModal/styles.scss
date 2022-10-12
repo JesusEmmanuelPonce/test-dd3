@@ -1,0 +1,53 @@
+.customModal {
+    display: flex;
+    align-items: flex-start;
+
+    animation: 400ms ease 0s 1 normal none running fadeIn;
+    background: rgba(243, 243, 243, 0.89);
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 1.2rem;
+    z-index: 1000;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    &__body {
+        background: #ffffff;
+        background-clip: padding-box;
+        background: rgba(243, 243, 243, 0.89);
+        border: 1px solid #000000;
+        border-radius: 15px;
+        max-width: 546px;
+        margin: auto;
+        padding: 1.2rem;
+        position: relative;
+    }
+}
+
+.hiddenModal {
+    animation: 400ms fadeOut forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}

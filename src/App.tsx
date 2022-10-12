@@ -1,23 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
 
-function App() {
+import Keyboard from 'components/keyboard';
+import InstructionsModal from 'components/InstructionsModal';
+import "./scss/styles.scss";
+import ScoreModal from 'components/ScoreModal';
+
+const App = () => {
+
+  const [openScore, setOpenScore] = useState<boolean>(true);
+  const [openInstructions, setOpenInstructions] = useState<boolean>(false);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
+        <Keyboard />
+        <p className=''>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <InstructionsModal
+          open={openInstructions}
+          onClose={() => setOpenInstructions(false)}
+        />
+        <ScoreModal
+          open={openScore}
+          onClose={() => setOpenScore(false)}
+        />
       </header>
     </div>
   );

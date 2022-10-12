@@ -1,0 +1,86 @@
+@import "scss/styles.scss";
+
+.scoreModalRootContent {
+    padding: 0;
+    max-width: 546px;
+    width: 100%;
+}
+
+.scoreModal {
+    font-family: 'Roboto';
+    font-size: 19px;
+    padding: 59px 93px 24px 78px;
+
+    h2 {
+        text-align: center;
+    }
+
+    header {
+
+        p {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 19px;
+        }
+    }
+
+    &__points {
+        display: flex;
+        justify-content: space-between;
+
+        &-wrapper {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+
+            span {
+                font-weight: 800;
+                font-size: 35px;
+            }
+
+            p {
+                color: #000000;
+                font-size: 21px;
+                margin: 0;
+                margin-top: 16px;
+            }
+        }
+    }
+
+    &__nextWord {
+        color: #000000;
+        font-size: 19px;
+        text-align: center;
+        margin-top: 55px;
+    }
+
+    &__time {
+        font-weight: 700;
+        font-size: 24px;
+        text-align: center;
+    }
+
+    &__footer {
+        display: flex;
+        justify-content: center;
+        
+        margin-top: 31px;
+
+        &-btnPlay {
+            background-color: $greenColor;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            
+            height: 44px;
+            max-width: 256px;
+            width: 100%;
+            
+            font-style: normal;
+            font-weight: 800;
+            font-size: 28px;
+            line-height: 33px;;
+        }
+    }
+}
