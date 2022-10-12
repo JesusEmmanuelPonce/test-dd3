@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import ClearKey from 'resources/icons/ClearKey';
 import "./styles.scss";
 
 interface IKeyboardProps{}
@@ -78,6 +79,7 @@ const Keyboard:FC <IKeyboardProps> = ({}) => {
                 p
             </button>
         </div>
+
         <div className="keyboard__secondRow">
             <button
                 type="button"
@@ -150,11 +152,13 @@ const Keyboard:FC <IKeyboardProps> = ({}) => {
                 ñ
             </button>
         </div>
+
         <div className="keyboard__thirdRow">
             <button
                 type="button"
                 value=""
                 onClick={(e: any) => console.log(e.target.value)}
+                className="enterKey"
             >
                 ENTER
             </button>
@@ -211,8 +215,9 @@ const Keyboard:FC <IKeyboardProps> = ({}) => {
                 type="button"
                 value=""
                 onClick={(e: any) => console.log(e.target.value)}
+                className="clearKey"
             >
-                {"<-"}
+                <ClearKey />
             </button>
         </div>
     </div>

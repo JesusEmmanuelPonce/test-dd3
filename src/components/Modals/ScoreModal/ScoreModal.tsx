@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import CustomModal from 'components/CustomModal';
+import CustomModal from 'components/Modals/CustomModal';
 import "./styles.scss";
 
 interface IScoreModalProps {

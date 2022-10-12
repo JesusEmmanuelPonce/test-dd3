@@ -1,0 +1,23 @@
+.appBar {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+
+    background-color: #F3F3F3;
+    border-radius: 15px;
+    padding: 22px;
+    max-width: 638px;
+    margin: 0 auto;
+    width: 100%;
+
+    button {
+        background-color: transparent;
+        border: none;
+        padding: 0;
+
+        .iconGray {
+            color: #818181;
+            font-size: 27px;
+        }
+    }
+}

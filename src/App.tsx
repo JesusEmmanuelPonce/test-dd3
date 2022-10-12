@@ -1,33 +1,38 @@
 import { useState } from 'react';
 
-import Keyboard from 'components/keyboard';
-import InstructionsModal from 'components/InstructionsModal';
+import AppBar from 'components/AppBar';
+import Keyboard from 'components/Keyboard';
+import ScoreModal from 'components/Modals/ScoreModal';
+import InstructionsModal from 'components/Modals/InstructionsModal';
+import "./app.scss"
 import "./scss/styles.scss";
-import ScoreModal from 'components/ScoreModal';
 
 const App = () => {
 
-  const [openScore, setOpenScore] = useState<boolean>(true);
-  const [openInstructions, setOpenInstructions] = useState<boolean>(false);
+	const [openScore, setOpenScore] = useState<boolean>(false);
+	const [openInstructions, setOpenInstructions] = useState<boolean>(false);
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <Keyboard />
-        <p className=''>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <InstructionsModal
-          open={openInstructions}
-          onClose={() => setOpenInstructions(false)}
-        />
-        <ScoreModal
-          open={openScore}
-          onClose={() => setOpenScore(false)}
-        />
-      </header>
-    </div>
-  );
+	return (
+		<div className="app">
+			<header className='app__header'>
+				<AppBar />
+			</header>
+			<section className='app__keyboard'>
+				<Keyboard />
+			</section>
+			<p className=''>
+				Edit <code>src/App.tsx</code> and save to reload.
+			</p>
+			<InstructionsModal
+				open={openInstructions}
+				onClose={() => setOpenInstructions(false)}
+			/>
+			<ScoreModal
+				open={openScore}
+				onClose={() => setOpenScore(false)}
+			/>
+		</div>
+  	);
 }
 
 export default App;

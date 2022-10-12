@@ -1,11 +1,54 @@
 .keyboard {
-    width: 600px;
+    background: rgba(218, 220, 224, 0.3);
+    border-radius: 15px;
+    font-family: 'Roboto';
+    padding: 33px 37px 33px 0;
+    width: 638px;
 
     button {
-        // background-color: transparent;
-        cursor: pointer;
+        background: #D3D6DA;
         border: none;
-        height: 30px;
-        width: 30px;
+        border-radius: 5px;
+        color: #56575E;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 18px;
+        width: 44.67px;
+        height: 51.05px;
+    }
+
+    &__firstRow,
+    &__secondRow,
+    &__thirdRow {
+        display: flex;
+        gap: 9.5px;
+        margin-bottom: 9px;
+    }
+
+    &__firstRow {
+        margin-left: 52.6px;
+    }
+
+    &__secondRow {
+        margin-left: 68px;
+    }
+
+    &__thirdRow {
+        margin-left: 20px;
+
+        .clearKey,
+        .enterKey {
+            width: 71.78px;
+        }
+
+        .enterKey {
+            font-size: 15px;
+        }
+
+        .clearKey {
+            svg {
+                font-size: 22px;
+            }
+        }
     }
 }
