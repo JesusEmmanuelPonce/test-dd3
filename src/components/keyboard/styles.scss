@@ -46,6 +46,10 @@
         }
 
         .clearKey {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+
             svg {
                 font-size: 22px;
             }

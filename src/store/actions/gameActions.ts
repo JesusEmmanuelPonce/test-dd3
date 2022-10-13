@@ -1,4 +1,4 @@
-import { SET_THEME, SET_THEME_TYPE } from "store/types/gameTypes";
+import { SET_THEME, SET_THEME_TYPE, SET_WORD, SET_WORD_TYPE } from "store/types/gameTypes";
 import { SET_OPEN_INSTRUCTIONS_TYPE, SET_OPEN_SCORE_TYPE, SET_OPEN_INSTRUCTIONS, SET_OPEN_SCORE } from '../types/gameTypes';
 
 export interface SetTheme {
@@ -16,6 +16,11 @@ export interface SetOpenScore {
     payload: boolean;
 };
 
+export interface SetWord {
+    type: SET_WORD_TYPE;
+    payload: string;
+};
+
 export const setTheme = (theme: string): SetTheme => ({
     type: SET_THEME,
     payload: theme
@@ -25,9 +30,15 @@ export const setOpenInstructions = (value: boolean): SetOpenInstructions => ({
     type: SET_OPEN_INSTRUCTIONS,
     payload: value
 });
+
 export const setOpenScore = (value: boolean): SetOpenScore => ({
     type: SET_OPEN_SCORE,
     payload: value
 });
 
-export type GameActions = SetTheme | SetOpenInstructions | SetOpenScore;
+export const setWord = (word: string): SetWord => ({
+    type: SET_WORD,
+    payload: word
+});
+
+export type GameActions = SetTheme | SetOpenInstructions | SetOpenScore | SetWord;
