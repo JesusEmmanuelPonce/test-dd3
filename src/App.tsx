@@ -8,21 +8,27 @@ import ScoreModal from 'components/Modals/ScoreModal';
 import { setWord } from 'store/actions/gameActions';
 import { getWord } from 'services/games';
 import InstructionsModal from 'components/Modals/InstructionsModal';
+import { clearTypedWord } from './store/actions/gameActions';
 import { AppDispatch, RootState } from 'store';
 import "./app.scss"
 import "./scss/styles.scss";
+import Board from 'components/Board';
 
 interface IAppProps {
 	theme: string;
 	setWordRdx: (word: string) => void;
+	clearTypedWordRdx: () => void;
 }
 
 const App: FC<IAppProps> = ({
 	theme,
-	setWordRdx
+	setWordRdx,
+	clearTypedWordRdx,
 }) => {
 
 	useEffect(() => {
+
+		clearTypedWordRdx();
 
 		const setWord = async() => {
 			const word = await getWord();
@@ -43,7 +49,12 @@ const App: FC<IAppProps> = ({
 			</header>
 
 			<section className='flex justify-center'>
-				<Game />
+				<div className='app__board'>
+					<Board />
+					<div className='app__board-game'>
+						<Game />
+					</div>
+				</div>
 			</section>
 
 			<section className='flex justify-center'>
@@ -62,6 +73,7 @@ const mapStateToProps = ({ gameReducer }: RootState) => ({
 
 const mapDispatchToProps = (dispatch: AppDispatch) => ({
 	setWordRdx: (word: string) => dispatch(setWord(word)),
+	clearTypedWordRdx: () => dispatch(clearTypedWord()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

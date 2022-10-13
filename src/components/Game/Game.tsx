@@ -1,21 +1,58 @@
 
 import { FC } from 'react';
+import { connect } from 'react-redux';
+import { RootState } from 'store';
 import "./styles.scss"
 
-interface IGameProps {}
+interface IGameProps {
+	typedWord: string[]
+}
 
-const Game: FC<IGameProps> = ({}) => {
+const Game: FC<IGameProps> = ({
+	typedWord
+}) => {
+
 	return (
 		<div className='game'>
 			<div className='game__examples'>
-				<input className="letter" value="G" />
-				<input className="letter" value="A" />
-				<input className="letter" value="T" />
-				<input className="letter" value="O" />
-				<input className="letter" value="S" />
+				{typedWord.map((word, index) => (
+					<div key={index} className="game__examples-letter">{word}</div>	
+				))}
+			</div>
+			<div className='game__examples'>
+				<div className="game__examples-letter"></div>
+				<div className="game__examples-letter"></div>
+				<div className="game__examples-letter"></div>
+				<div className="game__examples-letter"></div>
+				<div className="game__examples-letter"></div>
+			</div>
+			<div className='game__examples'>
+				<div className="game__examples-letter"></div>
+				<div className="game__examples-letter"></div>
+				<div className="game__examples-letter"></div>
+				<div className="game__examples-letter"></div>
+				<div className="game__examples-letter"></div>
+			</div>
+			<div className='game__examples'>
+				<div className="game__examples-letter"></div>
+				<div className="game__examples-letter"></div>
+				<div className="game__examples-letter"></div>
+				<div className="game__examples-letter"></div>
+				<div className="game__examples-letter"></div>
+			</div>
+			<div className='game__examples'>
+				<div className="game__examples-letter"></div>
+				<div className="game__examples-letter"></div>
+				<div className="game__examples-letter"></div>
+				<div className="game__examples-letter"></div>
+				<div className="game__examples-letter"></div>
 			</div>
 		</div>
 	)
-}
+};
 
-export default Game
+const mapStateToProps = ({ gameReducer }: RootState) => ({
+	typedWord: gameReducer?.typingWord ?? [],
+});
+
+export default connect(mapStateToProps)(Game)

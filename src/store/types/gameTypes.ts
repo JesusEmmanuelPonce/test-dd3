@@ -9,3 +9,9 @@ export type SET_OPEN_SCORE_TYPE = typeof SET_OPEN_SCORE;
 
 export const SET_WORD = 'SET_WORD';
 export type SET_WORD_TYPE = typeof SET_WORD;
+
+export const SET_TYPING_WORD = 'SET_TYPING_WORD';
+export type SET_TYPING_WORD_TYPE = typeof SET_TYPING_WORD;
+
+export const CLEAR_TYPED_WORD = 'CLEAR_TYPED_WORD';
+export type CLEAR_TYPED_WORD_TYPE = typeof CLEAR_TYPED_WORD;
