@@ -2,20 +2,29 @@ import { FC } from 'react';
 
 import CustomModal from 'components/Modals/CustomModal';
 import "./styles.scss";
+import { AppDispatch, RootState } from 'store';
+import { connect } from 'react-redux';
+import { setOpenInstructions } from 'store/actions/gameActions';
 
 interface IInstructionsProps {
-    open: boolean;
-    onClose: () => void;
+    theme: string;
+    openInstructions: boolean;
+    setOpenInstructionsRdx: (value: boolean) => void;
 };
 
 const Instructions: FC<IInstructionsProps> = ({
-    open,
-    onClose
+    theme,
+    openInstructions,
+    setOpenInstructionsRdx
 }) => {
 
     return (
         <CustomModal
-            open={open}
+            open={openInstructions}
+            className={{
+                contentModal: theme === "light" ? "instructionsModalRootContent lightTheme" : "instructionsModalRootContent darkThemeContent",
+                overlayModal: theme === "light" ? "lightTheme" : "darkTheme"
+            }}
         >
             <div className='instructions'>
 
@@ -66,10 +75,10 @@ const Instructions: FC<IInstructionsProps> = ({
                 <footer className='instructions__footer'>
                     <button
                         type='button'
-                        onClick={onClose}
+                        onClick={() => setOpenInstructionsRdx(!openInstructions)}
                         className='instructions__footer-btnPlay'
                     >
-                            !JUGAR¡
+                        !JUGAR¡
                     </button>
                 </footer>
             </div>
@@ -77,4 +86,13 @@ const Instructions: FC<IInstructionsProps> = ({
     )
 }
 
-export default Instructions
+const mapStateToProps = ({ gameReducer }: RootState) => ({
+	theme: gameReducer?.theme ?? "",
+    openInstructions: gameReducer?.openInstructions ?? false,
+});
+
+const mapDispatchToProps = (dispatch: AppDispatch) => ({
+    setOpenInstructionsRdx: (value: boolean) => dispatch(setOpenInstructions(value))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Instructions)

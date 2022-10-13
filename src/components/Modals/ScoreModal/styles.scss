@@ -6,6 +6,11 @@
     width: 100%;
 }
 
+.darkThemeContent {
+    background: #262B3C;
+    color: #fff;
+}
+
 .scoreModal {
     font-family: 'Roboto';
     font-size: 19px;
@@ -39,7 +44,6 @@
             }
 
             p {
-                color: #000000;
                 font-size: 21px;
                 margin: 0;
                 margin-top: 16px;
@@ -48,7 +52,6 @@
     }
 
     &__nextWord {
-        color: #000000;
         font-size: 19px;
         text-align: center;
         margin-top: 55px;

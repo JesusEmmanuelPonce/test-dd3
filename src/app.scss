@@ -1,14 +1,10 @@
 .app {
 	margin: auto;
 	min-height: 100vh;
-
-	&__header {
-		margin-top: 63px;
-	}
+	padding-top: 63px;
 
 	&__keyboard {
 		display: flex;
 		justify-content: center;
 	}
-	
 }

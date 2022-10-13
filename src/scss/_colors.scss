@@ -5,6 +5,13 @@ $grayColor: #939B9F;
 $lightColor: gba(243, 243, 243, 0.89);
 $darkColor: rgba(38, 43, 60, 0.89);
 
-.red {
-    color: red;
+.lightTheme {
+    background: $lightColor;
+    transition: all .8s ease;
 }
+
+.darkTheme {
+    background-color: $darkColor;
+    transition: all .8s ease;
+}
+

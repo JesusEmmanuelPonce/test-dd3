@@ -1,19 +1,24 @@
-import { useState } from 'react';
+import { FC } from 'react';
+import { connect } from 'react-redux';
 
 import AppBar from 'components/Ui/AppBar';
 import Keyboard from 'components/Keyboard';
 import ScoreModal from 'components/Modals/ScoreModal';
+import { RootState } from 'store';
 import InstructionsModal from 'components/Modals/InstructionsModal';
 import "./app.scss"
 import "./scss/styles.scss";
 
-const App = () => {
+interface IAppProps {
+	theme: string;
+}
 
-	const [openScore, setOpenScore] = useState<boolean>(false);
-	const [openInstructions, setOpenInstructions] = useState<boolean>(false);
+const App: FC<IAppProps> = ({
+	theme
+}) => {
 
 	return (
-		<div className="app">
+		<div className={`app ${theme === "light" ? "lightTheme" : "darkTheme"}`}>
 			<header className='app__header'>
 				<AppBar />
 			</header>
@@ -22,16 +27,14 @@ const App = () => {
 				<Keyboard />
 			</section>
 
-			<InstructionsModal
-				open={openInstructions}
-				onClose={() => setOpenInstructions(false)}
-			/>
-			<ScoreModal
-				open={openScore}
-				onClose={() => setOpenScore(false)}
-			/>
+			<InstructionsModal />
+			<ScoreModal />
 		</div>
   	);
-}
+};
 
-export default App;
+const mapStateToProps = ({ gameReducer }: RootState) => ({
+	theme: gameReducer?.theme ?? "",
+});
+
+export default connect(mapStateToProps)(App);

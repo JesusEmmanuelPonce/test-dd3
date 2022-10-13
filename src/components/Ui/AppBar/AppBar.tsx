@@ -1,27 +1,47 @@
 
 import { FC } from 'react';
-import Question from 'resources/icons/Question';
+import { connect } from 'react-redux';
 
 import Chart from 'resources/images/chart.png';
+import Question from 'resources/icons/Question';
 import SwitchBotton from '../SwitchBotton';
+import { AppDispatch, RootState } from 'store';
+import { setOpenInstructions, setOpenScore } from 'store/actions/gameActions';
 import "./styles.scss"
 
-interface IAppBarProps {}
+interface IAppBarProps {
+    theme: string;
+    openScore: boolean;
+    openInstructions: boolean;
+    setOpenScoreRdx: (value: boolean) => void;
+    setOpenInstructionsRdx: (value: boolean) => void;
+}
 
-const AppBar: FC<IAppBarProps> = ({}) => {
+const AppBar: FC<IAppBarProps> = ({
+    theme,
+    openScore,
+    openInstructions,
+    setOpenScoreRdx,
+    setOpenInstructionsRdx
+}) => {
+
   return (
-    <div className='appBar'>
-        <button>
+    <div className={`appBar ${theme === "light" ? "lightAppBar" : "darkAppBar"}`}>
+        <button
+            type='button'
+            onClick={() => setOpenInstructionsRdx(!openInstructions)}
+        >
             <Question className='iconGray' />
         </button>
 
         <span>WORDLE</span>
 
         <div>
-            <button>
-                <picture>
-                    <img src={Chart} alt="" />
-                </picture>
+            <button
+                type='button'
+                onClick={() => setOpenScoreRdx(!openScore)}
+            >
+                <img src={Chart} alt="" />
             </button>
 
             <SwitchBotton />
@@ -30,4 +50,15 @@ const AppBar: FC<IAppBarProps> = ({}) => {
   )
 }
 
-export default AppBar
+const mapStateToProps = ({ gameReducer }: RootState) => ({
+	theme: gameReducer?.theme ?? "",
+    openScore: gameReducer?.openScore ?? false,
+    openInstructions: gameReducer?.openInstructions ?? false,
+});
+
+const mapDispatchToProps = (dispatch: AppDispatch) => ({
+    setOpenScoreRdx: (value: boolean) => dispatch(setOpenScore(value)),
+    setOpenInstructionsRdx: (value: boolean) => dispatch(setOpenInstructions(value))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppBar)

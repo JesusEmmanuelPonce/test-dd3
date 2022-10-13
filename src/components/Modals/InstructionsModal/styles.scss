@@ -1,7 +1,14 @@
 @import "scss/styles.scss";
 
-.rootContentModal {
-    max-width: 300px;
+.instructionsModalRootContent {
+    padding: 54px 26px 24px 43px;
+    max-width: 546px;
+    width: 100%;
+}
+
+.darkThemeContent {
+    background: #262B3C;
+    color: #fff;
 }
 
 .instructions {
@@ -10,6 +17,7 @@
 
     h2 {
         text-align: center;
+        margin-top: 0;
     }
 
     header {

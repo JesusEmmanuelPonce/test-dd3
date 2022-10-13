@@ -1,23 +1,29 @@
 import { FC } from 'react';
+import { connect } from 'react-redux';
 
 import CustomModal from 'components/Modals/CustomModal';
+import { setOpenScore } from 'store/actions/gameActions';
+import { AppDispatch, RootState } from 'store';
 import "./styles.scss";
 
 interface IScoreModalProps {
-    open: boolean;
-    onClose: () => void;
+    theme: string;
+    openScore: boolean;
+    setOpenScoreRdx: (value: boolean) => void;
 };
 
 const ScoreModal: FC<IScoreModalProps> = ({
-    open,
-    onClose
+    theme,
+    openScore,
+    setOpenScoreRdx
 }) => {
 
     return (
         <CustomModal
-            open={open}
+            open={openScore}
             className={{
-                contentModal: "scoreModalRootContent"
+                contentModal: theme === "light" ? "scoreModalRootContent lightTheme" : "scoreModalRootContent darkThemeContent",
+                overlayModal: theme === "light" ? "lightTheme" : "darkTheme"
             }}
         >
             <div className='scoreModal'>
@@ -48,7 +54,7 @@ const ScoreModal: FC<IScoreModalProps> = ({
                 <footer className='scoreModal__footer'>
                     <button
                         type='button'
-                        onClick={onClose}
+                        onClick={() => setOpenScoreRdx(!openScore)}
                         className='scoreModal__footer-btnPlay'
                     >
                         ACEPTAR
@@ -57,6 +63,15 @@ const ScoreModal: FC<IScoreModalProps> = ({
             </div>
         </CustomModal>
     )
-}
+};
 
-export default ScoreModal;
+const mapStateToProps = ({ gameReducer }: RootState) => ({
+	theme: gameReducer?.theme ?? "",
+    openScore: gameReducer?.openScore ?? false,
+});
+
+const mapDispatchToProps = (dispatch: AppDispatch) => ({
+    setOpenScoreRdx: (value: boolean) => dispatch(setOpenScore(value))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ScoreModal);
