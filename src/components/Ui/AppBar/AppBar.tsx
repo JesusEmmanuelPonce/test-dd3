@@ -2,7 +2,7 @@
 import { FC } from 'react';
 import { connect } from 'react-redux';
 
-import Chart from 'resources/images/chart.png';
+import Score from 'resources/icons/Score';
 import Question from 'resources/icons/Question';
 import SwitchBotton from '../SwitchBotton';
 import { AppDispatch, RootState } from 'store';
@@ -31,17 +31,19 @@ const AppBar: FC<IAppBarProps> = ({
             type='button'
             onClick={() => setOpenInstructionsRdx(!openInstructions)}
         >
-            <Question className='iconGray' />
+            <Question className={`iconBtn ${theme === "light" ? "lightBtn" : "darkBtn"}`} />
         </button>
 
-        <span>WORDLE</span>
+        <span className={`appBar__title ${theme === "light" ? "darkTitle" : "lightTitle"}`}>
+            WORDLE
+        </span>
 
-        <div>
+        <div className='appBar__score'>
             <button
                 type='button'
                 onClick={() => setOpenScoreRdx(!openScore)}
             >
-                <img src={Chart} alt="" />
+                <Score className={`iconBtn ${theme === "light" ? "lightBtn" : "darkBtn"}`} />
             </button>
 
             <SwitchBotton />

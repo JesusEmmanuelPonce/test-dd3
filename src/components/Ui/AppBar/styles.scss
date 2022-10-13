@@ -4,6 +4,7 @@
     justify-content: space-between;
 
     border-radius: 15px;
+    font-family: "Roboto";
     padding: 22px;
     max-width: 638px;
     margin: 0 auto;
@@ -25,9 +26,48 @@
         cursor: pointer;
         padding: 0;
 
-        .iconGray {
-            color: #818181;
+        .iconBtn {
             font-size: 27px;
+            
+            &.lightBtn {
+                color: #818181;
+            }
+
+            &.darkBtn {
+                color: #DADCE0;
+            }
         }
+    }
+
+    &__title {
+        font-weight: 600;
+        font-size: 40px;
+        letter-spacing: 0.075em;
+
+        &.lightTitle {
+            color: #DADCE0;
+        }
+
+        &.darkTitle {
+            color: #202537;
+        }
+    }
+
+    &__score {
+
+        button {
+            .iconBtn {
+                font-size: 27px;
+                
+                &.lightBtn {
+                    color: rgba(0, 0, 0, 0.49);
+                }
+    
+                &.darkBtn {
+                    color: #fff;
+                }
+            }
+        }
+        
     }
 }
