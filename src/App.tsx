@@ -24,11 +24,11 @@ const App: FC<IAppProps> = ({
 				<AppBar />
 			</header>
 
-			<section className='app__game'>
+			<section className='flex justify-center'>
 				<Game />
 			</section>
 
-			<section className='app__keyboard'>
+			<section className='flex justify-center'>
 				<Keyboard />
 			</section>
 
