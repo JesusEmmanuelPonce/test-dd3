@@ -1,18 +1,21 @@
 
 import { FC } from 'react';
-import Question from 'resources/icons/Question';
-
-import Chart from 'resources/images/chart.png';
 import "./styles.scss"
 
 interface IGameProps {}
 
 const Game: FC<IGameProps> = ({}) => {
-  return (
-    <div className='game'>
-        
-    </div>
-  )
+	return (
+		<div className='game'>
+			<div className='game__examples'>
+				<input className="letter" value="G" />
+				<input className="letter" value="A" />
+				<input className="letter" value="T" />
+				<input className="letter" value="O" />
+				<input className="letter" value="S" />
+			</div>
+		</div>
+	)
 }
 
 export default Game

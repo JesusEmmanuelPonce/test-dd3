@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { connect } from 'react-redux';
 
+import Game from 'components/Game';
 import AppBar from 'components/Ui/AppBar';
 import Keyboard from 'components/Keyboard';
 import ScoreModal from 'components/Modals/ScoreModal';
@@ -22,6 +23,10 @@ const App: FC<IAppProps> = ({
 			<header className='app__header'>
 				<AppBar />
 			</header>
+
+			<section className='app__game'>
+				<Game />
+			</section>
 
 			<section className='app__keyboard'>
 				<Keyboard />
