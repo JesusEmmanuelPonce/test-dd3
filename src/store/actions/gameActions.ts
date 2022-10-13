@@ -1,5 +1,5 @@
-import { CLEAR_TYPED_WORD, CLEAR_TYPED_WORD_TYPE, SET_THEME, SET_THEME_TYPE, SET_TYPING_WORD, SET_TYPING_WORD_TYPE, SET_WORD, SET_WORD_TYPE } from "store/types/gameTypes";
-import { SET_OPEN_INSTRUCTIONS_TYPE, SET_OPEN_SCORE_TYPE, SET_OPEN_INSTRUCTIONS, SET_OPEN_SCORE } from '../types/gameTypes';
+import { CLEAR_TYPED_LETTER, CLEAR_TYPED_WORD, CLEAR_TYPED_WORD_TYPE, SET_THEME, SET_THEME_TYPE, SET_TYPING_WORD, SET_TYPING_WORD_TYPE, SET_WORD, SET_WORD_TYPE } from "store/types/gameTypes";
+import { SET_OPEN_INSTRUCTIONS_TYPE, SET_OPEN_SCORE_TYPE, SET_OPEN_INSTRUCTIONS, SET_OPEN_SCORE, CLEAR_TYPED_LETTER_TYPE } from '../types/gameTypes';
 
 export interface SetTheme {
     type: SET_THEME_TYPE;
@@ -28,6 +28,11 @@ export interface SetTypingWord {
 
 export interface ClearTypedWord {
     type: CLEAR_TYPED_WORD_TYPE;
+};
+
+export interface ClearTypedLetter {
+    type: CLEAR_TYPED_LETTER_TYPE;
+    payload: string[];
 };
 
 export const setTheme = (theme: string): SetTheme => ({
@@ -59,10 +64,16 @@ export const clearTypedWord = (): ClearTypedWord => ({
     type: CLEAR_TYPED_WORD,
 });
 
+export const clearTypedLetter = (word: string[]): ClearTypedLetter => ({
+    type: CLEAR_TYPED_LETTER,
+    payload: word,
+});
+
 export type GameActions =
     SetWord |
     SetTheme |
     SetOpenScore |
     SetTypingWord |
     ClearTypedWord |
+    ClearTypedLetter |
     SetOpenInstructions;

@@ -22,7 +22,7 @@ const Game: FC<IGameProps> = ({
 				<div className="board__examples-letter"></div>
 			</div>
 			<div className='board__examples'>
-				<div className="board__examples-letter">a</div>
+				<div className="board__examples-letter"></div>
 				<div className="board__examples-letter"></div>
 				<div className="board__examples-letter"></div>
 				<div className="board__examples-letter"></div>

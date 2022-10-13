@@ -4,17 +4,19 @@ import { connect } from 'react-redux';
 import ClearKey from 'resources/icons/ClearKey';
 import { RootState } from 'store/index';
 import { AppDispatch } from 'store';
-import { setTypingWord } from '../../store/actions/gameActions';
+import { setTypingWord, clearTypedLetter } from 'store/actions/gameActions';
 import "./styles.scss";
 
 interface IKeyboardProps {
     typedWord: string[],
     setTypingWordRdx: (letter: string) => void;
+    clearTypedLetterRdx: (word: string[]) => void;
 }
 
 const Keyboard:FC <IKeyboardProps> = ({
     typedWord,
     setTypingWordRdx,
+    clearTypedLetterRdx,
 }) => {
 
     const handleKey = ({target}: React.MouseEvent<HTMLElement> ) => {
@@ -23,6 +25,13 @@ const Keyboard:FC <IKeyboardProps> = ({
         if(typedWord.length < 5) {
             setTypingWordRdx(button?.value);
         }
+    }
+
+    const handleClearKey = () => {
+        const word = typedWord;
+        word.pop();
+
+        clearTypedLetterRdx(word);
     }
 
     return (
@@ -234,7 +243,7 @@ const Keyboard:FC <IKeyboardProps> = ({
                 <button
                     type="button"
                     value=""
-                    onClick={handleKey}
+                    onClick={handleClearKey}
                     className="clearKey"
                 >
                     <ClearKey />
@@ -249,7 +258,8 @@ const mapStateToProps = ({ gameReducer }: RootState) => ({
 });
 
 const mapDispatchToProps = (dispatch: AppDispatch) => ({
-    setTypingWordRdx: (letter: string) => dispatch(setTypingWord(letter))
+    setTypingWordRdx: (letter: string) => dispatch(setTypingWord(letter)),
+    clearTypedLetterRdx: (word: string[]) => dispatch(clearTypedLetter(word)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Keyboard)

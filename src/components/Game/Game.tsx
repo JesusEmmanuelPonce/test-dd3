@@ -1,5 +1,5 @@
 
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { RootState } from 'store';
 import "./styles.scss"
