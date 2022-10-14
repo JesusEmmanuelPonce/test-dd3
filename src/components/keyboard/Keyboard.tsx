@@ -267,7 +267,7 @@ const Keyboard:FC <IKeyboardProps> = ({
                     value="z"
                     onClick={handleKey}
                 >
-                    q
+                    z
                 </button>
                 <button
                     type="button"

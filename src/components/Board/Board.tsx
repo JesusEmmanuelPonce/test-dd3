@@ -90,6 +90,18 @@ const Game: FC<IGameProps> = ({
 	// eslint-disable-next-line
 	}, [word]);
 
+	useEffect(() => {
+	  
+		const openIsLose = () => {
+			if(attempts > 5) {
+				setOpenScoreRdx(true);
+			}
+		}
+
+		openIsLose();
+
+	}, [attempts]);
+
 	return (
 		<div className='board'>
 			<div className='board__examples'>

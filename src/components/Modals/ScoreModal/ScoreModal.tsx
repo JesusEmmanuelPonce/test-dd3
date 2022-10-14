@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
 import CustomModal from 'components/Modals/CustomModal';
-import { setOpenScore, setTimer } from 'store/actions/gameActions';
+import { clearAttemptWord, clearTypedWord, setAttempt, setIsWins, setNewWord, setOpenScore, setTimer } from 'store/actions/gameActions';
 import { AppDispatch, RootState } from 'store';
 import "./styles.scss";
 
@@ -11,40 +11,89 @@ interface IScoreModalProps {
     openScore: boolean;
     setOpenScoreRdx: (value: boolean) => void;
     wins: number;
+    isWins: boolean;
     totalAttempts: number;
     setTimerRdx: (second: number) => void;
+    setIsWinsRdx: (isWins: boolean) => void;
+    setNewWordRdx: (newWord: boolean) => void;
     timerSeconds: number;
+
+    clearTypedWordRdx: () => void;
+	clearAttemptWordRdx: () => void;
+	setAttemptRdx: (attempt: number) => void;
+    attempts: number;
 };
 
 const ScoreModal: FC<IScoreModalProps> = ({
     wins,
     theme,
+    isWins,
     openScore,
     totalAttempts,
     setOpenScoreRdx,
     setTimerRdx,
     timerSeconds,
+    setIsWinsRdx,
+    setNewWordRdx,
+    attempts,
+
+    setAttemptRdx,
+    clearTypedWordRdx,
+    clearAttemptWordRdx,
 }) => {
 
     const [min, setMin] = useState<number | string>(0)
     const [sec, setSec] = useState<number | string>(0)
-    
+
+    const handleAccept = () => {
+
+        if(isWins) {
+            setTimerRdx(300);
+
+            setIsWinsRdx(false);
+            setNewWordRdx(true);
+            setOpenScoreRdx(false);
+
+            setAttemptRdx(1);
+            clearTypedWordRdx();
+            clearAttemptWordRdx();
+        } else if(attempts > 5) {
+            setTimerRdx(300);
+
+            setIsWinsRdx(false);
+            setNewWordRdx(true);
+            setOpenScoreRdx(false);
+
+            setAttemptRdx(1);
+            clearTypedWordRdx();
+            clearAttemptWordRdx();
+        } else {
+            setOpenScoreRdx(false)
+        }
+    }
+
     useEffect(() => {
         let seconds = timerSeconds;
 
-        const timer = setInterval(() => {
+        const getTimer = () => {
             seconds = seconds - 1;
             
             const secTimer = (Math.round(seconds % 0x3C)).toString();
             const minTimer  = (Math.floor(seconds / 0x3C ) % 0x3C).toString();
-
+            
             setSec(secTimer)
             setMin(minTimer)
-
-            setTimerRdx(seconds);
             
+            setTimerRdx(seconds);
+        }
 
-        }, 1000);
+        let timer:any = null;
+
+        if(timerSeconds > 0) {
+            timer = setInterval(() => {
+                getTimer();
+            }, 1000);
+        }
 
         return () => clearInterval(timer)
         
@@ -86,7 +135,7 @@ const ScoreModal: FC<IScoreModalProps> = ({
                 <footer className='scoreModal__footer'>
                     <button
                         type='button'
-                        onClick={() => setOpenScoreRdx(!openScore)}
+                        onClick={handleAccept}
                         className='scoreModal__footer-btnPlay'
                     >
                         ACEPTAR
@@ -101,13 +150,21 @@ const mapStateToProps = ({ gameReducer }: RootState) => ({
 	theme: gameReducer?.theme ?? "",
     openScore: gameReducer?.openScore ?? false,
     wins: gameReducer?.wins ?? 0,
+    isWins: gameReducer?.isWins ?? false,
     totalAttempts: gameReducer?.totalAttempts ?? 0,
     timerSeconds: gameReducer?.timerSeconds ?? 0,
+    attempts: gameReducer?.attempts ?? 0,
 });
 
 const mapDispatchToProps = (dispatch: AppDispatch) => ({
     setTimerRdx: (seconds: number) => dispatch(setTimer(seconds)),
-    setOpenScoreRdx: (value: boolean) => dispatch(setOpenScore(value))
+    setIsWinsRdx: (isWins: boolean) => dispatch(setIsWins(isWins)),
+    setOpenScoreRdx: (value: boolean) => dispatch(setOpenScore(value)),
+    setNewWordRdx: (value: boolean) => dispatch(setNewWord(value)),
+
+    clearTypedWordRdx: () => dispatch(clearTypedWord()),
+	clearAttemptWordRdx: () => dispatch(clearAttemptWord()),
+	setAttemptRdx: (attempt: number) => dispatch(setAttempt(attempt)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ScoreModal);
