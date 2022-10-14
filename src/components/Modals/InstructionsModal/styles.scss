@@ -17,7 +17,10 @@
 
     h2 {
         text-align: center;
+        font-weight: 800;
+        font-size: 35px;
         margin-top: 0;
+        margin-bottom: 32px;
     }
 
     header {
@@ -75,7 +78,7 @@
         margin-top: 31px;
 
         &-btnPlay {
-            background-color: $greenColor;
+            background-color: $greenColor !important;
             border: none;
             border-radius: 5px;
             color: #fff;

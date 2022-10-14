@@ -51,10 +51,15 @@
         }
     }
 
+    &__word {
+        text-align: center;
+        margin-top: 41px;
+    }
+
     &__nextWord {
         font-size: 19px;
         text-align: center;
-        margin-top: 55px;
+        margin-top: 7px;
     }
 
     &__time {
@@ -70,7 +75,7 @@
         margin-top: 31px;
 
         &-btnPlay {
-            background-color: $greenColor;
+            background-color: $greenColor !important;
             border: none;
             border-radius: 5px;
             color: #fff;

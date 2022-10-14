@@ -22,9 +22,11 @@ interface IScoreModalProps {
 	clearAttemptWordRdx: () => void;
 	setAttemptRdx: (attempt: number) => void;
     attempts: number;
+    word: string;
 };
 
 const ScoreModal: FC<IScoreModalProps> = ({
+    word,
     wins,
     theme,
     isWins,
@@ -89,7 +91,7 @@ const ScoreModal: FC<IScoreModalProps> = ({
 
         let timer:any = null;
 
-        if(timerSeconds > 0) {
+        if(timerSeconds >= 0) {
             timer = setInterval(() => {
                 getTimer();
             }, 1000);
@@ -124,13 +126,19 @@ const ScoreModal: FC<IScoreModalProps> = ({
                     </div>
                 </div>
 
-                <p className='scoreModal__nextWord'>
-                    SIGUIENTE PALABRA
-                </p>
+                {attempts > 5 ? <p className='scoreModal__word'>La palabra era: <b>{word}</b></p> : undefined}
 
-                <p className='scoreModal__time'>
-                    {min < 10 ? `0${min}` : min}:{sec < 10 ? `0${sec}` : sec}
-                </p>
+                {attempts < 5 ?
+                    <>
+                        <p className='scoreModal__nextWord'>
+                            SIGUIENTE PALABRA
+                        </p>
+
+                        <p className='scoreModal__time'>
+                            {min < 10 ? `0${min}` : min}:{sec < 10 ? `0${sec}` : sec}
+                        </p>
+                        
+                    </>: undefined}
 
                 <footer className='scoreModal__footer'>
                     <button
@@ -154,6 +162,7 @@ const mapStateToProps = ({ gameReducer }: RootState) => ({
     totalAttempts: gameReducer?.totalAttempts ?? 0,
     timerSeconds: gameReducer?.timerSeconds ?? 0,
     attempts: gameReducer?.attempts ?? 0,
+    word: gameReducer?.word ?? "",
 });
 
 const mapDispatchToProps = (dispatch: AppDispatch) => ({
