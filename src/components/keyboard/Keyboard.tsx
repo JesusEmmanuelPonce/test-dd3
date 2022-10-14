@@ -10,10 +10,7 @@ import "./styles.scss";
 
 interface IKeyboardProps {
     attempt: number;
-    openScore: boolean,
     typedWord: string[],
-    selectWord: string,
-    setOpenScoreRdx: (value: boolean) => void;
     setTypingWordRdx: (letter: string) => void;
     clearTypedLetterRdx: (word: string[]) => void;
     setAttemptRdx: (attempt: number) => void;
@@ -21,14 +18,12 @@ interface IKeyboardProps {
     setAttemptWordRdx: (word: any) => void;
     totalAttempts: number;
 	setTotalAttemptsRdx: (total: number) => void;
+    isWins: boolean;
 }
 
 const Keyboard:FC <IKeyboardProps> = ({
     attempt,
-    openScore,
     typedWord,
-    selectWord,
-    setOpenScoreRdx,
     setTypingWordRdx,
     clearTypedLetterRdx,
     setAttemptRdx,
@@ -36,6 +31,7 @@ const Keyboard:FC <IKeyboardProps> = ({
     setAttemptWordRdx,
     totalAttempts,
 	setTotalAttemptsRdx,
+    isWins,
 }) => {
 
     const handleKey = ({target}: React.MouseEvent<HTMLElement> ) => {
@@ -93,6 +89,7 @@ const Keyboard:FC <IKeyboardProps> = ({
             <div className="keyboard__firstRow">
                 <button
                     type="button"
+                    disabled={isWins}
                     value="q"
                     onClick={handleKey}
                 >
@@ -100,6 +97,7 @@ const Keyboard:FC <IKeyboardProps> = ({
                 </button>
                 <button
                     type="button"
+                    disabled={isWins}
                     value="w"
                     onClick={handleKey}
                 >
@@ -107,6 +105,7 @@ const Keyboard:FC <IKeyboardProps> = ({
                 </button>
                 <button
                     type="button"
+                    disabled={isWins}
                     value="e"
                     onClick={handleKey}
                 >
@@ -114,6 +113,7 @@ const Keyboard:FC <IKeyboardProps> = ({
                 </button>
                 <button
                     type="button"
+                    disabled={isWins}
                     value="r"
                     onClick={handleKey}
                 >
@@ -121,6 +121,7 @@ const Keyboard:FC <IKeyboardProps> = ({
                 </button>
                 <button
                     type="button"
+                    disabled={isWins}
                     value="t"
                     onClick={handleKey}
                 >
@@ -128,6 +129,7 @@ const Keyboard:FC <IKeyboardProps> = ({
                 </button>
                 <button
                     type="button"
+                    disabled={isWins}
                     value="y"
                     onClick={handleKey}
                 >
@@ -135,6 +137,7 @@ const Keyboard:FC <IKeyboardProps> = ({
                 </button>
                 <button
                     type="button"
+                    disabled={isWins}
                     value="u"
                     onClick={handleKey}
                 >
@@ -142,6 +145,7 @@ const Keyboard:FC <IKeyboardProps> = ({
                 </button>
                 <button
                     type="button"
+                    disabled={isWins}
                     value="i"
                     onClick={handleKey}
                 >
@@ -149,6 +153,7 @@ const Keyboard:FC <IKeyboardProps> = ({
                 </button>
                 <button
                     type="button"
+                    disabled={isWins}
                     value="o"
                     onClick={handleKey}
                 >
@@ -156,6 +161,7 @@ const Keyboard:FC <IKeyboardProps> = ({
                 </button>
                 <button
                     type="button"
+                    disabled={isWins}
                     value="p"
                     onClick={handleKey}
                 >
@@ -166,6 +172,7 @@ const Keyboard:FC <IKeyboardProps> = ({
             <div className="keyboard__secondRow">
                 <button
                     type="button"
+                    disabled={isWins}
                     value="a"
                     onClick={handleKey}
                 >
@@ -173,6 +180,7 @@ const Keyboard:FC <IKeyboardProps> = ({
                 </button>
                 <button
                     type="button"
+                    disabled={isWins}
                     value="s"
                     onClick={handleKey}
                 >
@@ -180,6 +188,7 @@ const Keyboard:FC <IKeyboardProps> = ({
                 </button>
                 <button
                     type="button"
+                    disabled={isWins}
                     value="d"
                     onClick={handleKey}
                 >
@@ -187,6 +196,7 @@ const Keyboard:FC <IKeyboardProps> = ({
                 </button>
                 <button
                     type="button"
+                    disabled={isWins}
                     value="f"
                     onClick={handleKey}
                 >
@@ -194,6 +204,7 @@ const Keyboard:FC <IKeyboardProps> = ({
                 </button>
                 <button
                     type="button"
+                    disabled={isWins}
                     value="g"
                     onClick={handleKey}
                 >
@@ -201,6 +212,7 @@ const Keyboard:FC <IKeyboardProps> = ({
                 </button>
                 <button
                     type="button"
+                    disabled={isWins}
                     value="h"
                     onClick={handleKey}
                 >
@@ -208,6 +220,7 @@ const Keyboard:FC <IKeyboardProps> = ({
                 </button>
                 <button
                     type="button"
+                    disabled={isWins}
                     value="j"
                     onClick={handleKey}
                 >
@@ -215,6 +228,7 @@ const Keyboard:FC <IKeyboardProps> = ({
                 </button>
                 <button
                     type="button"
+                    disabled={isWins}
                     value="k"
                     onClick={handleKey}
                 >
@@ -222,6 +236,7 @@ const Keyboard:FC <IKeyboardProps> = ({
                 </button>
                 <button
                     type="button"
+                    disabled={isWins}
                     value="l"
                     onClick={handleKey}
                 >
@@ -229,6 +244,7 @@ const Keyboard:FC <IKeyboardProps> = ({
                 </button>
                 <button
                     type="button"
+                    disabled={isWins}
                     value="ñ"
                     onClick={handleKey}
                 >
@@ -239,7 +255,7 @@ const Keyboard:FC <IKeyboardProps> = ({
             <div className="keyboard__thirdRow">
                 <button
                     type="button"
-                    value=""
+                    disabled={isWins}
                     onClick={handleKey}
                     className="enterKey"
                 >
@@ -247,6 +263,7 @@ const Keyboard:FC <IKeyboardProps> = ({
                 </button>
                 <button
                     type="button"
+                    disabled={isWins}
                     value="z"
                     onClick={handleKey}
                 >
@@ -254,6 +271,7 @@ const Keyboard:FC <IKeyboardProps> = ({
                 </button>
                 <button
                     type="button"
+                    disabled={isWins}
                     value="x"
                     onClick={handleKey}
                 >
@@ -261,6 +279,7 @@ const Keyboard:FC <IKeyboardProps> = ({
                 </button>
                 <button
                     type="button"
+                    disabled={isWins}
                     value="c"
                     onClick={handleKey}
                 >
@@ -268,6 +287,7 @@ const Keyboard:FC <IKeyboardProps> = ({
                 </button>
                 <button
                     type="button"
+                    disabled={isWins}
                     value="v"
                     onClick={handleKey}
                 >
@@ -275,6 +295,7 @@ const Keyboard:FC <IKeyboardProps> = ({
                 </button>
                 <button
                     type="button"
+                    disabled={isWins}
                     value="b"
                     onClick={handleKey}
                 >
@@ -282,6 +303,7 @@ const Keyboard:FC <IKeyboardProps> = ({
                 </button>
                 <button
                     type="button"
+                    disabled={isWins}
                     value="n"
                     onClick={handleKey}
                 >
@@ -289,6 +311,7 @@ const Keyboard:FC <IKeyboardProps> = ({
                 </button>
                 <button
                     type="button"
+                    disabled={isWins}
                     value="m"
                     onClick={handleKey}
                 >
@@ -296,6 +319,7 @@ const Keyboard:FC <IKeyboardProps> = ({
                 </button>
                 <button
                     type="button"
+                    disabled={isWins}
                     value=""
                     onClick={handleClearKey}
                     className="clearKey"
@@ -309,14 +333,12 @@ const Keyboard:FC <IKeyboardProps> = ({
 
 const mapStateToProps = ({ gameReducer }: RootState) => ({
     typedWord: gameReducer?.typingWord ?? [],
-    openScore: gameReducer?.openScore ?? false,
-    selectWord: gameReducer?.word ?? "",
     attempt: gameReducer?.attempts ?? 1,
     totalAttempts: gameReducer?.totalAttempts ?? 0,
+    isWins: gameReducer?.isWins ?? false,
 });
 
 const mapDispatchToProps = (dispatch: AppDispatch) => ({
-    setOpenScoreRdx: (value: boolean) => dispatch(setOpenScore(value)),
     setTypingWordRdx: (letter: string) => dispatch(setTypingWord(letter)),
     clearTypedLetterRdx: (word: string[]) => dispatch(clearTypedLetter(word)),
     setAttemptRdx: (attempt: number) => dispatch(setAttempt(attempt)),

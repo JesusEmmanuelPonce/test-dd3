@@ -33,3 +33,6 @@ export type SET_WINS_TYPE = typeof SET_WINS;
 
 export const SET_TOTAL_ATTEMPTS = 'SET_TOTAL_ATTEMPTS';
 export type SET_TOTAL_ATTEMPTS_TYPE = typeof SET_TOTAL_ATTEMPTS;
+
+export const SET_IS_WIN = 'SET_IS_WIN';
+export type SET_IS_WIN_TYPE = typeof SET_IS_WIN;

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { FC, useCallback, useEffect, useState } from 'react';
 
 import { IResult } from 'store/reducers/gameReducer';
-import { setWins } from '../../store/actions/gameActions';
+import { setWins, setIsWins, setOpenScore } from 'store/actions/gameActions';
 import { AppDispatch, RootState } from 'store';
 import "./styles.scss"
 
@@ -11,8 +11,11 @@ interface IGameProps {
 	word: string;
 	wins: number;
 	result: IResult;
+	isWins: boolean;
 	attempts: number;
 	setWinsRdx: (wins: number) => void;
+	setIsWinsRdx: (isWins: boolean) => void;
+    setOpenScoreRdx: (value: boolean) => void;
 }
 
 const BoardsRows = () => (
@@ -28,9 +31,12 @@ const BoardsRows = () => (
 const Game: FC<IGameProps> = ({
 	wins,
 	word,
+	isWins,
 	result,
 	attempts,
 	setWinsRdx,
+	setIsWinsRdx,
+    setOpenScoreRdx,
 }) => {
 
 	const [wordArr, setWordArr] = useState<string[]>([])
@@ -41,8 +47,10 @@ const Game: FC<IGameProps> = ({
 				return element === wordSelected[index]; 
 			});
 
-			if(isSame) {
+			if(isSame && !isWins) {
 				setWinsRdx(wins + 1)
+				setIsWinsRdx(true);
+				setOpenScoreRdx(true);
 			}
 		}
 	}
@@ -137,11 +145,14 @@ const mapStateToProps = ({ gameReducer }: RootState) => ({
 	result: gameReducer?.result ?? {},
 	word: gameReducer?.word ?? "",
 	wins: gameReducer?.wins ?? 0,
+	isWins: gameReducer?.isWins ?? false,
 	attempts: gameReducer?.attempts ?? 0,
 });
 
 const mapDispatchToProps = (dispatch: AppDispatch) => ({
 	setWinsRdx: (wins: number) => dispatch(setWins(wins)),
+	setIsWinsRdx: (isWins: boolean) => dispatch(setIsWins(isWins)),
+	setOpenScoreRdx: (value: boolean) => dispatch(setOpenScore(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game)

@@ -1,4 +1,4 @@
-import { CLEAR_ATTEMPT_WORD_TYPE, CLEAR_TYPED_LETTER, CLEAR_TYPED_WORD, CLEAR_TYPED_WORD_TYPE, SET_ATTEMPT, SET_ATTEMPT_TYPE, SET_ATTEMPT_WORD, SET_ATTEMPT_WORD_TYPE, SET_THEME, SET_THEME_TYPE, SET_TOTAL_ATTEMPTS, SET_TOTAL_ATTEMPTS_TYPE, SET_TYPING_WORD, SET_TYPING_WORD_TYPE, SET_WINS_TYPE, SET_WORD, SET_WORD_TYPE } from "store/types/gameTypes";
+import { CLEAR_ATTEMPT_WORD_TYPE, CLEAR_TYPED_LETTER, CLEAR_TYPED_WORD, CLEAR_TYPED_WORD_TYPE, SET_ATTEMPT, SET_ATTEMPT_TYPE, SET_ATTEMPT_WORD, SET_ATTEMPT_WORD_TYPE, SET_IS_WIN, SET_IS_WIN_TYPE, SET_THEME, SET_THEME_TYPE, SET_TOTAL_ATTEMPTS, SET_TOTAL_ATTEMPTS_TYPE, SET_TYPING_WORD, SET_TYPING_WORD_TYPE, SET_WINS_TYPE, SET_WORD, SET_WORD_TYPE } from "store/types/gameTypes";
 import { SET_OPEN_INSTRUCTIONS_TYPE, SET_OPEN_SCORE_TYPE, SET_OPEN_INSTRUCTIONS, SET_OPEN_SCORE, CLEAR_TYPED_LETTER_TYPE, CLEAR_ATTEMPT_WORD, SET_WINS } from '../types/gameTypes';
 
 export interface SetTheme {
@@ -59,6 +59,11 @@ export interface SetTotalAttempts {
     payload: number;
 };
 
+export interface SetIsWin {
+    type: SET_IS_WIN_TYPE;
+    payload: boolean;
+};
+
 export const setTheme = (theme: string): SetTheme => ({
     type: SET_THEME,
     payload: theme
@@ -117,11 +122,16 @@ export const setTotalAttempts = (total: number): SetTotalAttempts => ({
     payload: total
 });
 
+export const setIsWins = (value: boolean): SetIsWin => ({
+    type: SET_IS_WIN,
+    payload: value
+});
 
 export type GameActions =
     SetWord |
     SetWins |
     SetTheme |
+    SetIsWin |
     SetAttempt |
     SetOpenScore |
     SetTypingWord |

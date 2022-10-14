@@ -15,6 +15,10 @@
         font-size: 18px;
         width: 44.67px;
         height: 51.05px;
+
+        &:disabled {
+            cursor: auto;
+        }
     }
 
     &__firstRow,
