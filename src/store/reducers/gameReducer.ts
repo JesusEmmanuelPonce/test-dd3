@@ -29,7 +29,7 @@ export interface IResult {
 const initialState = {
 	wins: 0,
     theme: "light",
-	timerSeconds: 300,
+	timerSeconds: 10,
 	isWins: false,
 	isNewWord: true,
 	openScore: false,

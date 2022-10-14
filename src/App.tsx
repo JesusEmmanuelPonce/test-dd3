@@ -24,9 +24,9 @@ interface IAppProps {
 	setAttemptRdx: (attempt: number) => void;
 	setNewWordRdx: (value: boolean) => void;
 	isWins: boolean;
-	setTimerRdx: (seconds: number) => void,
-	onceModalRdx: (value: boolean) => void;
+	setTimerRdx: (seconds: number) => void;
 	openOnceModal: boolean;
+	timerSeconds: number;
 }
 
 const App: FC<IAppProps> = ({
@@ -39,25 +39,25 @@ const App: FC<IAppProps> = ({
 	clearTypedWordRdx,
 	clearAttemptWordRdx,
 	setTimerRdx,
-	onceModalRdx,
 	openOnceModal,
+	timerSeconds,
 }) => {
+
+	const setWord = async() => {
+		const word = await getWord();
+
+		if(word) {
+			setTimerRdx(300);
+			setWordRdx(word)
+			setNewWordRdx(false);
+		}
+	};
 
 	useEffect(() => {
 
 		setAttemptRdx(1);
 		clearTypedWordRdx();
 		clearAttemptWordRdx();
-
-		const setWord = async() => {
-			const word = await getWord();
-
-			if(word) {
-				setTimerRdx(300);
-				setWordRdx(word)
-				setNewWordRdx(false);
-			}
-		};
 
 		if(isNewWord) {
 			setWord()
@@ -66,18 +66,17 @@ const App: FC<IAppProps> = ({
 	// eslint-disable-next-line
 	}, [isWins]);
 
-	// useEffect(() => {
+	useEffect(() => {
 
-	// 	const setOnceModalIntructions = () => {
-	// 		onceModalRdx(true);
-	// 	};
+		if(timerSeconds === 0) {
+			setAttemptRdx(1);
+			clearTypedWordRdx();
+			clearAttemptWordRdx();
+			setWord()
+		}
 
-		
-	// 	setOnceModalIntructions();
-
-	// }, []);
-
-	console.log({openOnceModal})
+	// eslint-disable-next-line
+	}, [timerSeconds]);
 
 	return (
 		<div className={`app ${theme === "light" ? "lightTheme" : "darkTheme"}`}>
@@ -114,6 +113,7 @@ const mapStateToProps = ({ gameReducer }: RootState) => ({
 	isNewWord: gameReducer?.isNewWord ?? false,
 	isWins: gameReducer?.isWins ?? false,
 	openOnceModal: gameReducer?.onceModal ?? false,
+	timerSeconds: gameReducer?.timerSeconds ?? 0,
 });
 
 const mapDispatchToProps = (dispatch: AppDispatch) => ({
@@ -123,7 +123,6 @@ const mapDispatchToProps = (dispatch: AppDispatch) => ({
 	setAttemptRdx: (attempt: number) => dispatch(setAttempt(attempt)),
 	setNewWordRdx: (value: boolean) => dispatch(setNewWord(value)),
 	setTimerRdx: (seconds: number) => dispatch(setTimer(seconds)),
-	onceModalRdx: (value: boolean) => dispatch(setOnceModal(value))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
