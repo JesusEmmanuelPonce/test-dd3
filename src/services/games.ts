@@ -12,7 +12,13 @@ export const getWord = () => {
 
             words.forEach(word => {
                 if(word.length === 5) {
-                    allWords.push(word);
+
+                    const normalizeText = word
+                                            .normalize('NFD')
+                                            .replace(/([^n\u0300-\u036f]|n(?!\u0303(?![\u0300-\u036f])))[\u0300-\u036f]+/gi,"$1")
+                                            .normalize();
+
+                    allWords.push(normalizeText);
                 }
             });
 
