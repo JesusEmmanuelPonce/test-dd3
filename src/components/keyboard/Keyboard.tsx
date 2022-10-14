@@ -1,22 +1,37 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { connect } from 'react-redux';
 
 import ClearKey from 'resources/icons/ClearKey';
 import { RootState } from 'store/index';
 import { AppDispatch } from 'store';
-import { setTypingWord, clearTypedLetter } from 'store/actions/gameActions';
+import { setTypingWord, clearTypedLetter, setOpenScore, setAttempt, clearTypedWord } from 'store/actions/gameActions';
 import "./styles.scss";
+import { setAttemptWord } from '../../store/actions/gameActions';
 
 interface IKeyboardProps {
+    attempt: number;
+    openScore: boolean,
     typedWord: string[],
+    selectWord: string,
+    setOpenScoreRdx: (value: boolean) => void;
     setTypingWordRdx: (letter: string) => void;
     clearTypedLetterRdx: (word: string[]) => void;
+    setAttemptRdx: (attempt: number) => void;
+    clearTypedWordRdx: () => void;
+    setAttemptWordRdx: (word: any) => void;
 }
 
 const Keyboard:FC <IKeyboardProps> = ({
+    attempt,
+    openScore,
     typedWord,
+    selectWord,
+    setOpenScoreRdx,
     setTypingWordRdx,
     clearTypedLetterRdx,
+    setAttemptRdx,
+    clearTypedWordRdx,
+    setAttemptWordRdx
 }) => {
 
     const handleKey = ({target}: React.MouseEvent<HTMLElement> ) => {
@@ -33,6 +48,35 @@ const Keyboard:FC <IKeyboardProps> = ({
 
         clearTypedLetterRdx(word);
     }
+
+    useEffect(() => {
+        const verifyWords = () => {
+            if(typedWord.length === 5) {
+            
+                if(attempt === 1) {
+                    setAttemptWordRdx({ firstAttempt: typedWord})
+                }
+                if(attempt === 2) {
+                    setAttemptWordRdx({ secodAttempt: typedWord})
+                }
+                if(attempt === 3) {
+                    setAttemptWordRdx({ thirdAttempt: typedWord})
+                }
+                if(attempt === 4) {
+                    setAttemptWordRdx({ fourthAttempt: typedWord})
+                }
+                if(attempt === 5) {
+                    setAttemptWordRdx({ fifthAttempt: typedWord})
+                }
+
+                clearTypedWordRdx()
+                setAttemptRdx(attempt + 1);
+            }
+        }
+
+        verifyWords()
+
+    }, [typedWord])
 
     return (
         <div className='keyboard'>
@@ -255,11 +299,18 @@ const Keyboard:FC <IKeyboardProps> = ({
 
 const mapStateToProps = ({ gameReducer }: RootState) => ({
     typedWord: gameReducer?.typingWord ?? [],
+    openScore: gameReducer?.openScore ?? false,
+    selectWord: gameReducer?.word ?? "",
+    attempt: gameReducer?.attempts ?? 1,
 });
 
 const mapDispatchToProps = (dispatch: AppDispatch) => ({
+    setOpenScoreRdx: (value: boolean) => dispatch(setOpenScore(value)),
     setTypingWordRdx: (letter: string) => dispatch(setTypingWord(letter)),
     clearTypedLetterRdx: (word: string[]) => dispatch(clearTypedLetter(word)),
+    setAttemptRdx: (attempt: number) => dispatch(setAttempt(attempt)),
+    clearTypedWordRdx: () => dispatch(clearTypedWord()),
+    setAttemptWordRdx: (word: any) => dispatch(setAttemptWord(word))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Keyboard)

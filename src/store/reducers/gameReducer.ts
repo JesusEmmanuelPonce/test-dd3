@@ -1,5 +1,5 @@
 import { GameActions } from "store/actions/gameActions";
-import { CLEAR_TYPED_LETTER, SET_THEME, SET_TYPING_WORD } from "store/types/gameTypes";
+import { CLEAR_TYPED_LETTER, SET_ATTEMPT, SET_ATTEMPT_WORD, SET_THEME, SET_TYPING_WORD } from "store/types/gameTypes";
 import { SET_OPEN_INSTRUCTIONS, SET_OPEN_SCORE, SET_WORD, CLEAR_TYPED_WORD } from '../types/gameTypes';
 
 export interface GameStore {
@@ -8,6 +8,16 @@ export interface GameStore {
 	openScore: boolean
 	typingWord: string[];
 	openInstructions: boolean
+	result: IResult,
+	attempts: number,
+}
+
+export interface IResult {
+	firstAttempt: string[],
+	secodAttempt: string[],
+	thirdAttempt: string[],
+	fourthAttempt: string[],
+	fifthAttempt: string[],
 }
 
 const initialState = {
@@ -15,6 +25,14 @@ const initialState = {
 	openScore: false,
 	typingWord: [],
 	openInstructions: false,
+	attempts: 1,
+	result: {
+		firstAttempt: [],
+		secodAttempt: [],
+		thirdAttempt: [],
+		fourthAttempt: [],
+		fifthAttempt: [],
+	}
 }
 
 const subscriptionsReducer = (state: GameStore = initialState, action: GameActions): GameStore => {
@@ -60,6 +78,21 @@ const subscriptionsReducer = (state: GameStore = initialState, action: GameActio
 			return {
 				...state,
 				typingWord: [...action?.payload]
+			};
+
+		case SET_ATTEMPT:
+			return {
+				...state,
+				attempts: action?.payload
+			};
+
+		case SET_ATTEMPT_WORD:
+			return {
+				...state,
+				result: {
+					...state.result,
+					...action?.payload
+				}
 			};
 
 		default:

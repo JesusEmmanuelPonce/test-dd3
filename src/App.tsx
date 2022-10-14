@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { FC, useEffect } from 'react';
 
 import Game from 'components/Game';
+import Board from 'components/Board';
 import AppBar from 'components/Ui/AppBar';
 import Keyboard from 'components/Keyboard';
 import ScoreModal from 'components/Modals/ScoreModal';
@@ -12,7 +13,6 @@ import { clearTypedWord } from './store/actions/gameActions';
 import { AppDispatch, RootState } from 'store';
 import "./app.scss"
 import "./scss/styles.scss";
-import Board from 'components/Board';
 
 interface IAppProps {
 	theme: string;

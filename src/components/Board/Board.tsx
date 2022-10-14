@@ -1,60 +1,116 @@
 
-import { FC } from 'react';
 import { connect } from 'react-redux';
+import { FC, useEffect, useState } from 'react';
+
+import { IResult } from 'store/reducers/gameReducer';
 import { RootState } from 'store';
 import "./styles.scss"
 
 interface IGameProps {
-	typedWord: string[]
+	result: IResult;
+	word: string;
+}
+
+const BoardsRows = () => (
+	<>
+		<div className="board__examples-letter"></div>
+		<div className="board__examples-letter"></div>
+		<div className="board__examples-letter"></div>
+		<div className="board__examples-letter"></div>
+		<div className="board__examples-letter"></div>
+	</>
+);
+
+const verifyStatus = (typedWord: string, wordSelected: string[], index: number) => {
+	let status = "";
+
+	if(!wordSelected.includes(typedWord)) {
+		status = "activeGray"
+	}
+
+	if(wordSelected.includes(typedWord)) {
+		status = "activeYellow"
+	}
+	if(wordSelected[index] === typedWord) {
+		status = "activeGreen"
+	}
+
+	return status;
 }
 
 const Game: FC<IGameProps> = ({
-	typedWord
+	result,
+	word,
 }) => {
+
+	const [wordArr, setWordArr] = useState<string[]>([])
+
+	useEffect(() => {
+
+		const convertWordToArr = () => {
+
+			const wordArr = word.split("");
+			setWordArr(wordArr);
+		};
+
+		convertWordToArr();
+
+	}, [word]);
 
 	return (
 		<div className='board'>
 			<div className='board__examples'>
-				<div className="board__examples-letter"></div>
-				<div className="board__examples-letter"></div>
-				<div className="board__examples-letter"></div>
-				<div className="board__examples-letter"></div>
-				<div className="board__examples-letter"></div>
+				{result?.firstAttempt.length ?
+					<>
+						{result?.firstAttempt.map((word, index) => (
+							<div key={index} className={`${verifyStatus(word, wordArr, index)} board__examples-letter`}>{word}</div>
+						))}
+					</> : <BoardsRows />
+				}
 			</div>
 			<div className='board__examples'>
-				<div className="board__examples-letter"></div>
-				<div className="board__examples-letter"></div>
-				<div className="board__examples-letter"></div>
-				<div className="board__examples-letter"></div>
-				<div className="board__examples-letter"></div>
+				{result?.secodAttempt.length ?
+					<>
+						{result?.secodAttempt.map((word, index) => (
+							<div key={index} className={`${verifyStatus(word, wordArr, index)} board__examples-letter`}>{word}</div>
+						))}
+					</> : <BoardsRows />
+				}
 			</div>
 			<div className='board__examples'>
-				<div className="board__examples-letter"></div>
-				<div className="board__examples-letter"></div>
-				<div className="board__examples-letter"></div>
-				<div className="board__examples-letter"></div>
-				<div className="board__examples-letter"></div>
+				{result?.thirdAttempt.length ?
+					<>
+						{result?.thirdAttempt.map((word, index) => (
+							<div key={index} className={`${verifyStatus(word, wordArr, index)} board__examples-letter`}>{word}</div>
+						))}
+					</> : <BoardsRows />
+				}
 			</div>
 			<div className='board__examples'>
-				<div className="board__examples-letter"></div>
-				<div className="board__examples-letter"></div>
-				<div className="board__examples-letter"></div>
-				<div className="board__examples-letter"></div>
-				<div className="board__examples-letter"></div>
+				{result?.fourthAttempt.length ?
+					<>
+						{result?.fourthAttempt.map((word, index) => (
+							<div key={index} className={`${verifyStatus(word, wordArr, index)} board__examples-letter`}>{word}</div>
+						))}
+					</> : <BoardsRows />
+				}
 			</div>
 			<div className='board__examples'>
-				<div className="board__examples-letter"></div>
-				<div className="board__examples-letter"></div>
-				<div className="board__examples-letter"></div>
-				<div className="board__examples-letter"></div>
-				<div className="board__examples-letter"></div>
+				{result?.fifthAttempt.length ?
+					<>
+						{result?.fifthAttempt.map((word, index) => (
+							<div key={index} className={`${verifyStatus(word, wordArr, index)} board__examples-letter`}>{word}</div>
+						))}
+					</> : <BoardsRows />
+				}
 			</div>
 		</div>
 	)
 };
 
 const mapStateToProps = ({ gameReducer }: RootState) => ({
-	typedWord: gameReducer?.typingWord ?? [],
+	result: gameReducer?.result ?? {},
+	word: gameReducer?.word ?? "",
 });
 
 export default connect(mapStateToProps)(Game)
