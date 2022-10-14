@@ -1,5 +1,5 @@
-import { CLEAR_ATTEMPT_WORD_TYPE, CLEAR_TYPED_LETTER, CLEAR_TYPED_WORD, CLEAR_TYPED_WORD_TYPE, SET_ATTEMPT, SET_ATTEMPT_TYPE, SET_ATTEMPT_WORD, SET_ATTEMPT_WORD_TYPE, SET_THEME, SET_THEME_TYPE, SET_TYPING_WORD, SET_TYPING_WORD_TYPE, SET_WORD, SET_WORD_TYPE } from "store/types/gameTypes";
-import { SET_OPEN_INSTRUCTIONS_TYPE, SET_OPEN_SCORE_TYPE, SET_OPEN_INSTRUCTIONS, SET_OPEN_SCORE, CLEAR_TYPED_LETTER_TYPE, CLEAR_ATTEMPT_WORD } from '../types/gameTypes';
+import { CLEAR_ATTEMPT_WORD_TYPE, CLEAR_TYPED_LETTER, CLEAR_TYPED_WORD, CLEAR_TYPED_WORD_TYPE, SET_ATTEMPT, SET_ATTEMPT_TYPE, SET_ATTEMPT_WORD, SET_ATTEMPT_WORD_TYPE, SET_THEME, SET_THEME_TYPE, SET_TOTAL_ATTEMPTS, SET_TOTAL_ATTEMPTS_TYPE, SET_TYPING_WORD, SET_TYPING_WORD_TYPE, SET_WINS_TYPE, SET_WORD, SET_WORD_TYPE } from "store/types/gameTypes";
+import { SET_OPEN_INSTRUCTIONS_TYPE, SET_OPEN_SCORE_TYPE, SET_OPEN_INSTRUCTIONS, SET_OPEN_SCORE, CLEAR_TYPED_LETTER_TYPE, CLEAR_ATTEMPT_WORD, SET_WINS } from '../types/gameTypes';
 
 export interface SetTheme {
     type: SET_THEME_TYPE;
@@ -47,6 +47,16 @@ export interface SetAttemptWord {
 
 export interface ClearAttemptWord {
     type: CLEAR_ATTEMPT_WORD_TYPE;
+};
+
+export interface SetWins {
+    type: SET_WINS_TYPE;
+    payload: number;
+};
+
+export interface SetTotalAttempts {
+    type: SET_TOTAL_ATTEMPTS_TYPE;
+    payload: number;
 };
 
 export const setTheme = (theme: string): SetTheme => ({
@@ -97,14 +107,27 @@ export const clearAttemptWord = (): ClearAttemptWord => ({
     type: CLEAR_ATTEMPT_WORD,
 });
 
+export const setWins = (wins: number): SetWins => ({
+    type: SET_WINS,
+    payload: wins
+});
+
+export const setTotalAttempts = (total: number): SetTotalAttempts => ({
+    type: SET_TOTAL_ATTEMPTS,
+    payload: total
+});
+
+
 export type GameActions =
     SetWord |
+    SetWins |
     SetTheme |
     SetAttempt |
     SetOpenScore |
     SetTypingWord |
     ClearTypedWord |
     SetAttemptWord |
+    SetTotalAttempts |
     ClearTypedLetter |
     ClearAttemptWord |
     SetOpenInstructions;

@@ -1,15 +1,17 @@
 import { GameActions } from "store/actions/gameActions";
-import { CLEAR_TYPED_LETTER, SET_ATTEMPT, SET_ATTEMPT_WORD, SET_THEME, SET_TYPING_WORD } from "store/types/gameTypes";
+import { CLEAR_TYPED_LETTER, SET_ATTEMPT, SET_ATTEMPT_WORD, SET_THEME, SET_TOTAL_ATTEMPTS, SET_TYPING_WORD, SET_WINS } from "store/types/gameTypes";
 import { SET_OPEN_INSTRUCTIONS, SET_OPEN_SCORE, SET_WORD, CLEAR_TYPED_WORD, CLEAR_ATTEMPT_WORD } from '../types/gameTypes';
 
 export interface GameStore {
 	word?: string;
     theme: string
+	wins: number;
 	openScore: boolean
 	typingWord: string[];
 	openInstructions: boolean
 	result: IResult,
 	attempts: number,
+	totalAttempts: number,
 }
 
 export interface IResult {
@@ -21,11 +23,13 @@ export interface IResult {
 }
 
 const initialState = {
+	wins: 0,
     theme: "light",
 	openScore: false,
 	typingWord: [],
 	openInstructions: false,
 	attempts: 1,
+	totalAttempts: 0,
 	result: {
 		firstAttempt: [],
 		secodAttempt: [],
@@ -99,6 +103,18 @@ const subscriptionsReducer = (state: GameStore = initialState, action: GameActio
 			return {
 				...state,
 				result: initialState?.result
+			};
+
+		case SET_WINS:
+			return {
+				...state,
+				wins: action?.payload
+			};
+
+		case SET_TOTAL_ATTEMPTS:
+			return {
+				...state,
+				totalAttempts: action?.payload
 			};
 
 		default:

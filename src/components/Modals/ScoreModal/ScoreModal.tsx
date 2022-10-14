@@ -10,11 +10,15 @@ interface IScoreModalProps {
     theme: string;
     openScore: boolean;
     setOpenScoreRdx: (value: boolean) => void;
+    wins: number;
+    totalAttempts: number;
 };
 
 const ScoreModal: FC<IScoreModalProps> = ({
+    wins,
     theme,
     openScore,
+    totalAttempts,
     setOpenScoreRdx
 }) => {
 
@@ -34,11 +38,11 @@ const ScoreModal: FC<IScoreModalProps> = ({
                 
                 <div className="scoreModal__points">
                     <div className='scoreModal__points-wrapper'>
-                        <span>8</span>
+                        <span>{totalAttempts}</span>
                         <p>Jugadas</p>
                     </div>
                     <div className='scoreModal__points-wrapper'>
-                        <span>2</span>
+                        <span>{wins}</span>
                         <p>Victorias</p>
                     </div>
                 </div>
@@ -68,6 +72,8 @@ const ScoreModal: FC<IScoreModalProps> = ({
 const mapStateToProps = ({ gameReducer }: RootState) => ({
 	theme: gameReducer?.theme ?? "",
     openScore: gameReducer?.openScore ?? false,
+    wins: gameReducer?.wins ?? 0,
+    totalAttempts: gameReducer?.totalAttempts ?? 0
 });
 
 const mapDispatchToProps = (dispatch: AppDispatch) => ({

@@ -1,14 +1,20 @@
 
 import { connect } from 'react-redux';
-import { FC, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 
 import { IResult } from 'store/reducers/gameReducer';
-import { RootState } from 'store';
+import { AppDispatch, RootState } from 'store';
 import "./styles.scss"
+import { setWins, setTotalAttempts } from '../../store/actions/gameActions';
 
 interface IGameProps {
-	result: IResult;
 	word: string;
+	wins: number;
+	result: IResult;
+	attempts: number;
+	setWinsRdx: (wins: number) => void;
+	totalAttempts: number;
+	setTotalAttemptsRdx: (total: number) => void;
 }
 
 const BoardsRows = () => (
@@ -21,29 +27,53 @@ const BoardsRows = () => (
 	</>
 );
 
-const verifyStatus = (typedWord: string, wordSelected: string[], index: number) => {
-	let status = "";
-
-	if(!wordSelected.includes(typedWord)) {
-		status = "activeGray"
-	}
-
-	if(wordSelected.includes(typedWord)) {
-		status = "activeYellow"
-	}
-	if(wordSelected[index] === typedWord) {
-		status = "activeGreen"
-	}
-
-	return status;
-}
-
 const Game: FC<IGameProps> = ({
-	result,
+	wins,
 	word,
+	result,
+	attempts,
+	setWinsRdx,
+	totalAttempts,
+	setTotalAttemptsRdx,
 }) => {
 
 	const [wordArr, setWordArr] = useState<string[]>([])
+
+	const getIsSame = (resultArr: string[], wordSelected: string[]) => {
+		if(word.length === 5) {
+			const isSame = resultArr.length === wordSelected.length && resultArr.every((element, index) => {
+				return element === wordSelected[index]; 
+			});
+
+			if(isSame) {
+				setWinsRdx(wins + 1)
+			} else {
+				setTotalAttemptsRdx(totalAttempts + 1)
+			}
+		}
+	}
+
+	const verifyStatus = useCallback((resultArr: string[], typedWord: string, wordSelected: string[], index: number) => {
+		let status = "";
+
+		getIsSame(resultArr, wordSelected);
+
+		if(!wordSelected.includes(typedWord)) {
+			status = "activeGray"
+		}
+
+		if(wordSelected.includes(typedWord)) {
+			status = "activeYellow"
+		}
+
+		if(wordSelected[index] === typedWord) {
+			status = "activeGreen"
+		}
+
+		return status;
+
+	// eslint-disable-next-line
+	}, [attempts]);
 
 	useEffect(() => {
 
@@ -64,7 +94,7 @@ const Game: FC<IGameProps> = ({
 				{result?.firstAttempt.length ?
 					<>
 						{result?.firstAttempt.map((word, index) => (
-							<div key={index} className={`${verifyStatus(word, wordArr, index)} board__examples-letter`}>{word}</div>
+							<div key={index} className={`${verifyStatus(result?.firstAttempt, word, wordArr, index)} board__examples-letter`}>{word}</div>
 						))}
 					</> : <BoardsRows />
 				}
@@ -73,7 +103,7 @@ const Game: FC<IGameProps> = ({
 				{result?.secodAttempt.length ?
 					<>
 						{result?.secodAttempt.map((word, index) => (
-							<div key={index} className={`${verifyStatus(word, wordArr, index)} board__examples-letter`}>{word}</div>
+							<div key={index} className={`${verifyStatus(result?.secodAttempt, word, wordArr, index)} board__examples-letter`}>{word}</div>
 						))}
 					</> : <BoardsRows />
 				}
@@ -82,7 +112,7 @@ const Game: FC<IGameProps> = ({
 				{result?.thirdAttempt.length ?
 					<>
 						{result?.thirdAttempt.map((word, index) => (
-							<div key={index} className={`${verifyStatus(word, wordArr, index)} board__examples-letter`}>{word}</div>
+							<div key={index} className={`${verifyStatus(result?.thirdAttempt, word, wordArr, index)} board__examples-letter`}>{word}</div>
 						))}
 					</> : <BoardsRows />
 				}
@@ -91,7 +121,7 @@ const Game: FC<IGameProps> = ({
 				{result?.fourthAttempt.length ?
 					<>
 						{result?.fourthAttempt.map((word, index) => (
-							<div key={index} className={`${verifyStatus(word, wordArr, index)} board__examples-letter`}>{word}</div>
+							<div key={index} className={`${verifyStatus(result?.fourthAttempt, word, wordArr, index)} board__examples-letter`}>{word}</div>
 						))}
 					</> : <BoardsRows />
 				}
@@ -100,7 +130,7 @@ const Game: FC<IGameProps> = ({
 				{result?.fifthAttempt.length ?
 					<>
 						{result?.fifthAttempt.map((word, index) => (
-							<div key={index} className={`${verifyStatus(word, wordArr, index)} board__examples-letter`}>{word}</div>
+							<div key={index} className={`${verifyStatus(result?.fifthAttempt, word, wordArr, index)} board__examples-letter`}>{word}</div>
 						))}
 					</> : <BoardsRows />
 				}
@@ -112,6 +142,14 @@ const Game: FC<IGameProps> = ({
 const mapStateToProps = ({ gameReducer }: RootState) => ({
 	result: gameReducer?.result ?? {},
 	word: gameReducer?.word ?? "",
+	wins: gameReducer?.wins ?? 0,
+	attempts: gameReducer?.attempts ?? 0,
+	totalAttempts: gameReducer?.totalAttempts ?? 0,
 });
 
-export default connect(mapStateToProps)(Game)
+const mapDispatchToProps = (dispatch: AppDispatch) => ({
+	setWinsRdx: (wins: number) => dispatch(setWins(wins)),
+	setTotalAttemptsRdx: (total: number) => dispatch(setTotalAttempts(total))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Game)

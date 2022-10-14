@@ -76,6 +76,7 @@ const Keyboard:FC <IKeyboardProps> = ({
 
         verifyWords()
 
+    // eslint-disable-next-line
     }, [typedWord])
 
     return (

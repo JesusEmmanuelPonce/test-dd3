@@ -27,3 +27,9 @@ export type SET_ATTEMPT_WORD_TYPE = typeof SET_ATTEMPT_WORD;
 
 export const CLEAR_ATTEMPT_WORD = 'CLEAR_ATTEMPT_WORD';
 export type CLEAR_ATTEMPT_WORD_TYPE = typeof CLEAR_ATTEMPT_WORD;
+
+export const SET_WINS = 'SET_WINS';
+export type SET_WINS_TYPE = typeof SET_WINS;
+
+export const SET_TOTAL_ATTEMPTS = 'SET_TOTAL_ATTEMPTS';
+export type SET_TOTAL_ATTEMPTS_TYPE = typeof SET_TOTAL_ATTEMPTS;
