@@ -100,6 +100,7 @@ const Game: FC<IGameProps> = ({
 
 		openIsLose();
 
+	// eslint-disable-next-line
 	}, [attempts]);
 
 	return (

@@ -99,6 +99,7 @@ const ScoreModal: FC<IScoreModalProps> = ({
 
         return () => clearInterval(timer)
         
+    // eslint-disable-next-line
     }, [timerSeconds])
 
     return (

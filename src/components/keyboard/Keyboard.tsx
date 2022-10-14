@@ -5,7 +5,7 @@ import ClearKey from 'resources/icons/ClearKey';
 import { RootState } from 'store/index';
 import { AppDispatch } from 'store';
 import { setAttemptWord } from '../../store/actions/gameActions';
-import { setTypingWord, clearTypedLetter, setOpenScore, setAttempt, clearTypedWord, setTotalAttempts } from 'store/actions/gameActions';
+import { setTypingWord, clearTypedLetter, setAttempt, clearTypedWord, setTotalAttempts } from 'store/actions/gameActions';
 import "./styles.scss";
 
 interface IKeyboardProps {

@@ -10,7 +10,7 @@ import { getWord } from 'services/games';
 import InstructionsModal from 'components/Modals/InstructionsModal';
 import InstructionsOnceModal from 'components/Modals/InstructionsOnceModal';
 import { AppDispatch, RootState } from 'store';
-import { setNewWord, setOnceModal, setTimer, setWord } from 'store/actions/gameActions';
+import { setNewWord, setTimer, setWord } from 'store/actions/gameActions';
 import { clearTypedWord, clearAttemptWord, setAttempt } from './store/actions/gameActions';
 import "./app.scss"
 import "./scss/styles.scss";
