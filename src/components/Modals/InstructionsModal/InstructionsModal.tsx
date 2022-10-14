@@ -1,10 +1,10 @@
 import { FC } from 'react';
 
 import CustomModal from 'components/Modals/CustomModal';
-import "./styles.scss";
-import { AppDispatch, RootState } from 'store';
 import { connect } from 'react-redux';
 import { setOpenInstructions } from 'store/actions/gameActions';
+import { AppDispatch, RootState } from 'store';
+import "./styles.scss";
 
 interface IInstructionsProps {
     theme: string;

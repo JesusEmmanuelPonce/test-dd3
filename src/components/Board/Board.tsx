@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { FC, useCallback, useEffect, useState } from 'react';
 
 import { IResult } from 'store/reducers/gameReducer';
+import { setWins } from '../../store/actions/gameActions';
 import { AppDispatch, RootState } from 'store';
 import "./styles.scss"
-import { setWins, setTotalAttempts } from '../../store/actions/gameActions';
 
 interface IGameProps {
 	word: string;
@@ -13,8 +13,6 @@ interface IGameProps {
 	result: IResult;
 	attempts: number;
 	setWinsRdx: (wins: number) => void;
-	totalAttempts: number;
-	setTotalAttemptsRdx: (total: number) => void;
 }
 
 const BoardsRows = () => (
@@ -33,8 +31,6 @@ const Game: FC<IGameProps> = ({
 	result,
 	attempts,
 	setWinsRdx,
-	totalAttempts,
-	setTotalAttemptsRdx,
 }) => {
 
 	const [wordArr, setWordArr] = useState<string[]>([])
@@ -47,8 +43,6 @@ const Game: FC<IGameProps> = ({
 
 			if(isSame) {
 				setWinsRdx(wins + 1)
-			} else {
-				setTotalAttemptsRdx(totalAttempts + 1)
 			}
 		}
 	}
@@ -144,12 +138,10 @@ const mapStateToProps = ({ gameReducer }: RootState) => ({
 	word: gameReducer?.word ?? "",
 	wins: gameReducer?.wins ?? 0,
 	attempts: gameReducer?.attempts ?? 0,
-	totalAttempts: gameReducer?.totalAttempts ?? 0,
 });
 
 const mapDispatchToProps = (dispatch: AppDispatch) => ({
 	setWinsRdx: (wins: number) => dispatch(setWins(wins)),
-	setTotalAttemptsRdx: (total: number) => dispatch(setTotalAttempts(total))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game)
