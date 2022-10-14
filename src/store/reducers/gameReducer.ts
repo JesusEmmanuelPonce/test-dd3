@@ -1,6 +1,6 @@
 import { GameActions } from "store/actions/gameActions";
 import { CLEAR_TYPED_LETTER, SET_ATTEMPT, SET_ATTEMPT_WORD, SET_THEME, SET_TYPING_WORD } from "store/types/gameTypes";
-import { SET_OPEN_INSTRUCTIONS, SET_OPEN_SCORE, SET_WORD, CLEAR_TYPED_WORD } from '../types/gameTypes';
+import { SET_OPEN_INSTRUCTIONS, SET_OPEN_SCORE, SET_WORD, CLEAR_TYPED_WORD, CLEAR_ATTEMPT_WORD } from '../types/gameTypes';
 
 export interface GameStore {
 	word?: string;
@@ -93,6 +93,12 @@ const subscriptionsReducer = (state: GameStore = initialState, action: GameActio
 					...state.result,
 					...action?.payload
 				}
+			};
+
+		case CLEAR_ATTEMPT_WORD:
+			return {
+				...state,
+				result: initialState?.result
 			};
 
 		default:

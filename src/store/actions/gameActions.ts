@@ -1,5 +1,5 @@
-import { CLEAR_TYPED_LETTER, CLEAR_TYPED_WORD, CLEAR_TYPED_WORD_TYPE, SET_ATTEMPT, SET_ATTEMPT_TYPE, SET_ATTEMPT_WORD, SET_ATTEMPT_WORD_TYPE, SET_THEME, SET_THEME_TYPE, SET_TYPING_WORD, SET_TYPING_WORD_TYPE, SET_WORD, SET_WORD_TYPE } from "store/types/gameTypes";
-import { SET_OPEN_INSTRUCTIONS_TYPE, SET_OPEN_SCORE_TYPE, SET_OPEN_INSTRUCTIONS, SET_OPEN_SCORE, CLEAR_TYPED_LETTER_TYPE } from '../types/gameTypes';
+import { CLEAR_ATTEMPT_WORD_TYPE, CLEAR_TYPED_LETTER, CLEAR_TYPED_WORD, CLEAR_TYPED_WORD_TYPE, SET_ATTEMPT, SET_ATTEMPT_TYPE, SET_ATTEMPT_WORD, SET_ATTEMPT_WORD_TYPE, SET_THEME, SET_THEME_TYPE, SET_TYPING_WORD, SET_TYPING_WORD_TYPE, SET_WORD, SET_WORD_TYPE } from "store/types/gameTypes";
+import { SET_OPEN_INSTRUCTIONS_TYPE, SET_OPEN_SCORE_TYPE, SET_OPEN_INSTRUCTIONS, SET_OPEN_SCORE, CLEAR_TYPED_LETTER_TYPE, CLEAR_ATTEMPT_WORD } from '../types/gameTypes';
 
 export interface SetTheme {
     type: SET_THEME_TYPE;
@@ -43,6 +43,10 @@ export interface SetAttempt {
 export interface SetAttemptWord {
     type: SET_ATTEMPT_WORD_TYPE;
     payload: any;
+};
+
+export interface ClearAttemptWord {
+    type: CLEAR_ATTEMPT_WORD_TYPE;
 };
 
 export const setTheme = (theme: string): SetTheme => ({
@@ -89,6 +93,10 @@ export const setAttemptWord = (attemptWord: any): SetAttemptWord => ({
     payload: attemptWord,
 });
 
+export const clearAttemptWord = (): ClearAttemptWord => ({
+    type: CLEAR_ATTEMPT_WORD,
+});
+
 export type GameActions =
     SetWord |
     SetTheme |
@@ -98,4 +106,5 @@ export type GameActions =
     ClearTypedWord |
     SetAttemptWord |
     ClearTypedLetter |
+    ClearAttemptWord |
     SetOpenInstructions;

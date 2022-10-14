@@ -55,6 +55,7 @@ const Game: FC<IGameProps> = ({
 
 		convertWordToArr();
 
+	// eslint-disable-next-line
 	}, [word]);
 
 	return (
