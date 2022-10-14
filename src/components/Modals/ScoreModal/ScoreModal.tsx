@@ -2,8 +2,8 @@ import { FC, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
 import CustomModal from 'components/Modals/CustomModal';
-import { clearAttemptWord, clearTypedWord, setAttempt, setIsWins, setNewWord, setOpenScore, setTimer } from 'store/actions/gameActions';
 import { AppDispatch, RootState } from 'store';
+import { clearAttemptWord, clearTypedWord, setAttempt, setIsWins, setNewWord, setOpenScore, setTimer } from 'store/actions/gameActions';
 import "./styles.scss";
 
 interface IScoreModalProps {
@@ -91,7 +91,7 @@ const ScoreModal: FC<IScoreModalProps> = ({
 
         let timer:any = null;
 
-        if(timerSeconds >= 0) {
+        if(timerSeconds > 0) {
             timer = setInterval(() => {
                 getTimer();
             }, 1000);
@@ -99,7 +99,7 @@ const ScoreModal: FC<IScoreModalProps> = ({
 
         return () => clearInterval(timer)
         
-    }, [])
+    }, [timerSeconds])
 
     return (
         <CustomModal

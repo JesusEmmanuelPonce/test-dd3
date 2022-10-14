@@ -1,4 +1,4 @@
-import { CLEAR_ATTEMPT_WORD_TYPE, CLEAR_TYPED_LETTER, CLEAR_TYPED_WORD, CLEAR_TYPED_WORD_TYPE, SET_ATTEMPT, SET_ATTEMPT_TYPE, SET_ATTEMPT_WORD, SET_ATTEMPT_WORD_TYPE, SET_IS_WIN, SET_IS_WIN_TYPE, SET_NEW_WORD, SET_NEW_WORD_TYPE, SET_THEME, SET_THEME_TYPE, SET_TIMER, SET_TIMER_TYPE, SET_TOTAL_ATTEMPTS, SET_TOTAL_ATTEMPTS_TYPE, SET_TYPING_WORD, SET_TYPING_WORD_TYPE, SET_WINS_TYPE, SET_WORD, SET_WORD_TYPE } from "store/types/gameTypes";
+import { CLEAR_ATTEMPT_WORD_TYPE, CLEAR_TYPED_LETTER, CLEAR_TYPED_WORD, CLEAR_TYPED_WORD_TYPE, SET_ATTEMPT, SET_ATTEMPT_TYPE, SET_ATTEMPT_WORD, SET_ATTEMPT_WORD_TYPE, SET_IS_WIN, SET_IS_WIN_TYPE, SET_NEW_WORD, SET_NEW_WORD_TYPE, SET_ONCE_MODAL, SET_ONCE_MODAL_TYPE, SET_THEME, SET_THEME_TYPE, SET_TIMER, SET_TIMER_TYPE, SET_TOTAL_ATTEMPTS, SET_TOTAL_ATTEMPTS_TYPE, SET_TYPING_WORD, SET_TYPING_WORD_TYPE, SET_WINS_TYPE, SET_WORD, SET_WORD_TYPE } from "store/types/gameTypes";
 import { SET_OPEN_INSTRUCTIONS_TYPE, SET_OPEN_SCORE_TYPE, SET_OPEN_INSTRUCTIONS, SET_OPEN_SCORE, CLEAR_TYPED_LETTER_TYPE, CLEAR_ATTEMPT_WORD, SET_WINS } from '../types/gameTypes';
 
 export interface SetTheme {
@@ -74,6 +74,11 @@ export interface SetTimer {
     payload: number;
 };
 
+export interface SetOnceModal {
+    type: SET_ONCE_MODAL_TYPE;
+    payload: boolean;
+};
+
 export const setTheme = (theme: string): SetTheme => ({
     type: SET_THEME,
     payload: theme
@@ -147,6 +152,11 @@ export const setTimer = (second: number): SetTimer => ({
     payload: second
 });
 
+export const setOnceModal = (value: boolean): SetOnceModal => ({
+    type: SET_ONCE_MODAL,
+    payload: value,
+});
+
 export type GameActions =
     SetWord |
     SetWins |
@@ -155,6 +165,7 @@ export type GameActions =
     SetTimer |
     SetNewWord |
     SetAttempt |
+    SetOnceModal |
     SetOpenScore |
     SetTypingWord |
     ClearTypedWord |

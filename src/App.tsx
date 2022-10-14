@@ -8,8 +8,9 @@ import Keyboard from 'components/Keyboard';
 import ScoreModal from 'components/Modals/ScoreModal';
 import { getWord } from 'services/games';
 import InstructionsModal from 'components/Modals/InstructionsModal';
-import { setNewWord, setTimer, setWord } from 'store/actions/gameActions';
+import InstructionsOnceModal from 'components/Modals/InstructionsOnceModal';
 import { AppDispatch, RootState } from 'store';
+import { setNewWord, setOnceModal, setTimer, setWord } from 'store/actions/gameActions';
 import { clearTypedWord, clearAttemptWord, setAttempt } from './store/actions/gameActions';
 import "./app.scss"
 import "./scss/styles.scss";
@@ -24,6 +25,8 @@ interface IAppProps {
 	setNewWordRdx: (value: boolean) => void;
 	isWins: boolean;
 	setTimerRdx: (seconds: number) => void,
+	onceModalRdx: (value: boolean) => void;
+	openOnceModal: boolean;
 }
 
 const App: FC<IAppProps> = ({
@@ -36,6 +39,8 @@ const App: FC<IAppProps> = ({
 	clearTypedWordRdx,
 	clearAttemptWordRdx,
 	setTimerRdx,
+	onceModalRdx,
+	openOnceModal,
 }) => {
 
 	useEffect(() => {
@@ -61,6 +66,19 @@ const App: FC<IAppProps> = ({
 	// eslint-disable-next-line
 	}, [isWins]);
 
+	// useEffect(() => {
+
+	// 	const setOnceModalIntructions = () => {
+	// 		onceModalRdx(true);
+	// 	};
+
+		
+	// 	setOnceModalIntructions();
+
+	// }, []);
+
+	console.log({openOnceModal})
+
 	return (
 		<div className={`app ${theme === "light" ? "lightTheme" : "darkTheme"}`}>
 			<header className='app__header'>
@@ -80,6 +98,11 @@ const App: FC<IAppProps> = ({
 				<Keyboard />
 			</section>
 
+			{openOnceModal ?
+				<InstructionsOnceModal />
+				: undefined
+			}
+
 			<InstructionsModal />
 			<ScoreModal />
 		</div>
@@ -90,6 +113,7 @@ const mapStateToProps = ({ gameReducer }: RootState) => ({
 	theme: gameReducer?.theme ?? "",
 	isNewWord: gameReducer?.isNewWord ?? false,
 	isWins: gameReducer?.isWins ?? false,
+	openOnceModal: gameReducer?.onceModal ?? false,
 });
 
 const mapDispatchToProps = (dispatch: AppDispatch) => ({
@@ -99,6 +123,7 @@ const mapDispatchToProps = (dispatch: AppDispatch) => ({
 	setAttemptRdx: (attempt: number) => dispatch(setAttempt(attempt)),
 	setNewWordRdx: (value: boolean) => dispatch(setNewWord(value)),
 	setTimerRdx: (seconds: number) => dispatch(setTimer(seconds)),
+	onceModalRdx: (value: boolean) => dispatch(setOnceModal(value))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
