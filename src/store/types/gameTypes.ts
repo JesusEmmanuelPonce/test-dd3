@@ -36,3 +36,9 @@ export type SET_TOTAL_ATTEMPTS_TYPE = typeof SET_TOTAL_ATTEMPTS;
 
 export const SET_IS_WIN = 'SET_IS_WIN';
 export type SET_IS_WIN_TYPE = typeof SET_IS_WIN;
+
+export const SET_NEW_WORD = 'SET_NEW_WORD';
+export type SET_NEW_WORD_TYPE = typeof SET_NEW_WORD;
+
+export const SET_TIMER = 'SET_TIMER';
+export type SET_TIMER_TYPE = typeof SET_TIMER;
